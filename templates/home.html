@@ -1,25 +1,50 @@
-<!doctype html>
-<html lang="ru">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Тренажёр по операционным системам</title>
-</head>
-<body>
-    <main>
-        <h1>Тренажёр по операционным системам</h1>
+{% extends "base.html" %}
+
+{% block content %}
+    <section class="hero">
+        <div class="hero__copy">
+            <p class="eyebrow">Подготовка к экзамену</p>
+            <h1>Тренажёр по операционным системам</h1>
+            <p class="hero__lead">Выберите тему, проверьте знания и разберите ошибки.</p>
+        </div>
+        <svg class="hero__art" viewBox="0 0 320 260" fill="none" aria-hidden="true" focusable="false">
+            <g stroke="#8ee8d2" stroke-opacity=".28">
+                <circle cx="169" cy="128" r="72"/>
+                <circle cx="169" cy="128" r="99"/>
+                <circle cx="169" cy="128" r="126"/>
+                <path d="M169 2v252M43 128h252"/>
+            </g>
+            <g fill="#8ee8d2">
+                <circle cx="70" cy="128" r="3"/>
+                <circle cx="169" cy="29" r="4"/>
+                <circle cx="241" cy="128" r="4"/>
+                <circle cx="169" cy="200" r="3"/>
+            </g>
+            <rect x="115" y="88" width="108" height="80" rx="16" fill="#18384a" stroke="#8ee8d2" stroke-width="1.5"/>
+            <path d="m141 114 14 14-14 14m30 0h25" stroke="#aaf6db" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </section>
+
+    <section class="topic-section" aria-labelledby="topics-heading">
+        <h2 id="topics-heading">Темы для практики</h2>
+        <p class="section-note">Откройте раздел, чтобы начать тест.</p>
         {% if topics %}
-            <ul>
+            <ul class="topic-grid">
                 {% for topic in topics %}
                     <li>
-                        <a href="{% url 'topic-detail' slug=topic.slug %}">{{ topic.name }}</a>
-                        — вопросов: {{ topic.question_count }}
+                        <a class="topic-card" href="{% url 'topic-detail' slug=topic.slug %}">
+                            <span class="topic-card__top" aria-hidden="true">
+                                <span class="index-chip">{{ forloop.counter|stringformat:"02d" }}</span>
+                                <span class="topic-card__arrow">↗</span>
+                            </span>
+                            <h3>{{ topic.name }}</h3>
+                            <span class="count-pill">Вопросов: {{ topic.question_count }}</span>
+                        </a>
                     </li>
                 {% endfor %}
             </ul>
         {% else %}
-            <p>Темы пока не добавлены</p>
+            <p class="notice">Темы пока не добавлены</p>
         {% endif %}
-    </main>
-</body>
-</html>
+    </section>
+{% endblock %}

@@ -10,6 +10,7 @@ class HomePageTests(TestCase):
 
         self.assertTemplateUsed(response, "home.html")
         self.assertContains(response, "<h1>Тренажёр по операционным системам</h1>", html=True)
+        self.assertContains(response, 'href="/static/quiz/site.css"')
         self.assertContains(response, "Темы пока не добавлены")
 
 
@@ -23,16 +24,12 @@ class TopicPageTests(TestCase):
     def test_home_lists_topics_with_links_and_question_counts(self):
         response = self.client.get(reverse("home"))
 
-        self.assertContains(
-            response,
-            '<li><a href="/topics/processes/">Процессы</a> — вопросов: 1</li>',
-            html=True,
-        )
-        self.assertContains(
-            response,
-            '<li><a href="/topics/memory/">Память</a> — вопросов: 0</li>',
-            html=True,
-        )
+        for slug, title, count in [("processes", "Процессы", 1), ("memory", "Память", 0)]:
+            with self.subTest(slug=slug):
+                url = reverse("topic-detail", kwargs={"slug": slug})
+                self.assertContains(response, f'href="{url}"')
+                self.assertContains(response, f"<h3>{title}</h3>", html=True)
+                self.assertContains(response, f"Вопросов: {count}")
         self.assertNotContains(response, "Темы пока не добавлены")
 
     def test_topic_page_shows_name_and_question_count(self):

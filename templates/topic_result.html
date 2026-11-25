@@ -1,34 +1,42 @@
-<!doctype html>
-<html lang="ru">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Результат: {{ topic.name }} — Тренажёр по операционным системам</title>
-</head>
-<body>
-    <main>
+{% extends "base.html" %}
+
+{% block title %}Результат: {{ topic.name }} — Тренажёр по операционным системам{% endblock %}
+{% block layout_class %}main--narrow{% endblock %}
+
+{% block content %}
+    <header class="page-intro">
+        <p class="eyebrow">Тест завершён</p>
         <h1>Результат: {{ topic.name }}</h1>
-        <p>Балл: <strong>{{ score }}/{{ question_count }}</strong></p>
-        {% if mistakes %}
-            <h2>Разбор ошибок</h2>
-            <ul>
+    </header>
+    <section class="score-panel" aria-labelledby="score-heading">
+        <h2 class="eyebrow" id="score-heading">Балл</h2>
+        <p><strong>{{ score }}/{{ question_count }}</strong></p>
+        <p class="score-panel__note">Верных ответов из общего числа</p>
+    </section>
+
+    {% if mistakes %}
+        <section class="review" aria-labelledby="review-heading">
+            <h2 id="review-heading">Разбор ошибок</h2>
+            <ul class="review-list">
                 {% for mistake in mistakes %}
-                    <li>
+                    <li class="review-card">
                         <h3>{{ mistake.question.text }}</h3>
                         {% if mistake.correct_choice %}
-                            <p>Правильный ответ: {{ mistake.correct_choice.text }}</p>
+                            <p><b>Правильный ответ:</b> {{ mistake.correct_choice.text }}</p>
                         {% else %}
                             <p>Правильный ответ пока не задан.</p>
                         {% endif %}
-                        <p>Пояснение: {{ mistake.question.explanation }}</p>
+                        <p><b>Пояснение:</b> {{ mistake.question.explanation }}</p>
                     </li>
                 {% endfor %}
             </ul>
-        {% else %}
-            <p>Все ответы верны.</p>
-        {% endif %}
-        <p><a href="{% url 'topic-detail' slug=topic.slug %}">Пройти ещё раз</a></p>
-        <p><a href="{% url 'home' %}">Вернуться к списку тем</a></p>
-    </main>
-</body>
-</html>
+        </section>
+    {% else %}
+        <p class="notice notice--success">Все ответы верны.</p>
+    {% endif %}
+
+    <div class="actions actions--result">
+        <a class="button button--primary" href="{% url 'topic-detail' slug=topic.slug %}">Пройти ещё раз</a>
+        <a class="button button--secondary" href="{% url 'home' %}">Вернуться к списку тем</a>
+    </div>
+{% endblock %}

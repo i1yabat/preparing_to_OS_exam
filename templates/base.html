@@ -1,0 +1,33 @@
+{% load static %}
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Тренажёр по операционным системам{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'quiz/site.css' %}">
+</head>
+<body>
+    <header class="site-header">
+        <div class="wrap site-header__inner">
+            <a class="brand" href="{% url 'home' %}">
+                <span class="brand__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="m6 7 5 5-5 5m8 0h4"/>
+                    </svg>
+                </span>
+                ОС Практикум
+            </a>
+            <nav aria-label="Основная навигация">
+                <a class="nav-link" href="{% url 'home' %}">Темы</a>
+            </nav>
+        </div>
+    </header>
+    <main class="wrap main {% block layout_class %}{% endblock %}">
+        {% block content %}{% endblock %}
+    </main>
+    <footer class="site-footer">
+        <div class="wrap">Операционные системы <span aria-hidden="true">·</span> Подготовка к экзамену</div>
+    </footer>
+</body>
+</html>

@@ -73,7 +73,11 @@ class QuizPageTests(TestCase):
             self.assertContains(response, question.choices.get(is_correct=True).text)
             self.assertContains(response, question.explanation)
         self.assertNotContains(response, Question.objects.get(pk=1).explanation)
-        self.assertContains(response, '<a href="/">Вернуться к списку тем</a>', html=True)
+        self.assertContains(
+            response,
+            '<a class="button button--secondary" href="/">Вернуться к списку тем</a>',
+            html=True,
+        )
 
     def test_score_boundaries(self):
         for choice_ids, score in [([2, 8, 9, 15, 18], 5), ([1, 5, 10, 13, 17], 0)]:
