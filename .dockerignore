@@ -1,0 +1,5 @@
+.env
+.git/
+.opencode/
+.venv/
+**/__pycache__/
