@@ -8,10 +8,13 @@ services:
       POSTGRES_USER: "${POSTGRES_USER:?Укажите POSTGRES_USER в .env}"
       POSTGRES_PASSWORD: "${POSTGRES_PASSWORD:?Укажите POSTGRES_PASSWORD в .env}"
       POSTGRES_HOST: db
+      VALKEY_URL: redis://valkey:6379/0
     ports:
       - "127.0.0.1:8001:8000"
     depends_on:
       db:
+        condition: service_healthy
+      valkey:
         condition: service_healthy
 
   db:
@@ -28,6 +31,15 @@ services:
       retries: 12
     volumes:
       - postgres_data:/var/lib/postgresql/data
+
+  valkey:
+    image: valkey/valkey:8.1-alpine
+    command: ["valkey-server", "--save", "", "--appendonly", "no"]
+    healthcheck:
+      test: ["CMD", "valkey-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 12
 
 volumes:
   postgres_data:

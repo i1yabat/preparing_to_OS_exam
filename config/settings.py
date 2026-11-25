@@ -45,6 +45,14 @@ DATABASES = {
     },
 }
 
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.redis.RedisCache",
+        "LOCATION": os.environ["VALKEY_URL"],
+        "KEY_PREFIX": "os-trainer",
+    },
+}
+
 LANGUAGE_CODE = "ru"
 TIME_ZONE = "UTC"
 USE_TZ = True
