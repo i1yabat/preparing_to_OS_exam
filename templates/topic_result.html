@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Результат: {{ topic.name }} — Тренажёр по операционным системам</title>
+</head>
+<body>
+    <main>
+        <h1>Результат: {{ topic.name }}</h1>
+        <p>Балл: <strong>{{ score }}/{{ question_count }}</strong></p>
+        {% if mistakes %}
+            <h2>Разбор ошибок</h2>
+            <ul>
+                {% for mistake in mistakes %}
+                    <li>
+                        <h3>{{ mistake.question.text }}</h3>
+                        {% if mistake.correct_choice %}
+                            <p>Правильный ответ: {{ mistake.correct_choice.text }}</p>
+                        {% else %}
+                            <p>Правильный ответ пока не задан.</p>
+                        {% endif %}
+                        <p>Пояснение: {{ mistake.question.explanation }}</p>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>Все ответы верны.</p>
+        {% endif %}
+        <p><a href="{% url 'topic-detail' slug=topic.slug %}">Пройти ещё раз</a></p>
+        <p><a href="{% url 'home' %}">Вернуться к списку тем</a></p>
+    </main>
+</body>
+</html>

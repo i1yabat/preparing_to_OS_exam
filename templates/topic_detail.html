@@ -8,7 +8,25 @@
 <body>
     <main>
         <h1>{{ topic.name }}</h1>
-        <p>Количество вопросов: {{ topic.question_count }}</p>
+        <p>Количество вопросов: {{ question_count }}</p>
+        {% if form %}
+            <p>Выберите по одному варианту ответа в каждом вопросе.</p>
+            <form method="post" novalidate>
+                {% csrf_token %}
+                {{ form.non_field_errors }}
+                {% for field in form %}
+                    <fieldset{% if field.aria_describedby %} aria-describedby="{{ field.aria_describedby }}"{% endif %}>
+                        <legend>{{ forloop.counter }}. {{ field.label }}</legend>
+                        {{ field.errors }}
+                        {{ field }}
+                    </fieldset>
+                {% endfor %}
+                <p><button type="submit">Проверить ответы</button></p>
+            </form>
+        {% else %}
+            <p>В этой теме пока нет вопросов.</p>
+        {% endif %}
+        <p><a href="{% url 'home' %}">Вернуться к списку тем</a></p>
     </main>
 </body>
 </html>
