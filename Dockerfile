@@ -10,6 +10,7 @@ RUN python -m pip install --no-cache-dir -r requirements.txt
 
 COPY manage.py .
 COPY config/ config/
+COPY quiz/ quiz/
 COPY templates/ templates/
 
 EXPOSE 8000

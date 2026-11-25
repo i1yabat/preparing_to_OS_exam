@@ -8,6 +8,18 @@
 <body>
     <main>
         <h1>Тренажёр по операционным системам</h1>
+        {% if topics %}
+            <ul>
+                {% for topic in topics %}
+                    <li>
+                        <a href="{% url 'topic-detail' slug=topic.slug %}">{{ topic.name }}</a>
+                        — вопросов: {{ topic.question_count }}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>Темы пока не добавлены</p>
+        {% endif %}
     </main>
 </body>
 </html>

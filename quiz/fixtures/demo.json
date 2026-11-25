@@ -1,0 +1,142 @@
+[
+  {
+    "model": "quiz.topic",
+    "pk": 1,
+    "fields": {"name": "Процессы", "slug": "processes"}
+  },
+  {
+    "model": "quiz.topic",
+    "pk": 2,
+    "fields": {"name": "Память", "slug": "memory"}
+  },
+  {
+    "model": "quiz.question",
+    "pk": 1,
+    "fields": {
+      "topic": 1,
+      "text": "Чем процесс отличается от программы?",
+      "explanation": "Программа — это код и данные, а процесс — её экземпляр со своим состоянием выполнения и ресурсами."
+    }
+  },
+  {"model": "quiz.choice", "pk": 1, "fields": {"question": 1, "text": "Процесс — это только файл программы на диске.", "is_correct": false}},
+  {"model": "quiz.choice", "pk": 2, "fields": {"question": 1, "text": "Процесс — это выполняющийся экземпляр программы со своим состоянием.", "is_correct": true}},
+  {"model": "quiz.choice", "pk": 3, "fields": {"question": 1, "text": "Процесс — это исходный код программы.", "is_correct": false}},
+  {"model": "quiz.choice", "pk": 4, "fields": {"question": 1, "text": "Процесс — это только область памяти для вызовов функций.", "is_correct": false}},
+  {
+    "model": "quiz.question",
+    "pk": 2,
+    "fields": {
+      "topic": 1,
+      "text": "В каком состоянии находится процесс, который может выполняться, но ждёт выделения процессорного времени?",
+      "explanation": "Готовый процесс не ждёт внешнего события: ему нужен только процессор."
+    }
+  },
+  {"model": "quiz.choice", "pk": 5, "fields": {"question": 2, "text": "Выполняется.", "is_correct": false}},
+  {"model": "quiz.choice", "pk": 6, "fields": {"question": 2, "text": "Заблокирован.", "is_correct": false}},
+  {"model": "quiz.choice", "pk": 7, "fields": {"question": 2, "text": "Завершён.", "is_correct": false}},
+  {"model": "quiz.choice", "pk": 8, "fields": {"question": 2, "text": "Готов к выполнению.", "is_correct": true}},
+  {
+    "model": "quiz.question",
+    "pk": 3,
+    "fields": {
+      "topic": 1,
+      "text": "Что делает операционная система при переключении контекста между двумя потоками?",
+      "explanation": "ОС сохраняет состояние процессора для текущего потока и восстанавливает состояние следующего, чтобы тот мог продолжить выполнение."
+    }
+  },
+  {"model": "quiz.choice", "pk": 9, "fields": {"question": 3, "text": "Сохраняет регистры текущего потока и восстанавливает регистры следующего.", "is_correct": true}},
+  {"model": "quiz.choice", "pk": 10, "fields": {"question": 3, "text": "Всегда запускает следующий поток с первой инструкции программы.", "is_correct": false}},
+  {"model": "quiz.choice", "pk": 11, "fields": {"question": 3, "text": "Копирует стек текущего потока поверх стека следующего.", "is_correct": false}},
+  {"model": "quiz.choice", "pk": 12, "fields": {"question": 3, "text": "Обнуляет регистры обоих потоков.", "is_correct": false}},
+  {
+    "model": "quiz.question",
+    "pk": 4,
+    "fields": {
+      "topic": 1,
+      "text": "Что обычно совместно используют потоки одного процесса?",
+      "explanation": "Потоки работают в одном адресном пространстве; при этом у каждого свои регистры и стек."
+    }
+  },
+  {"model": "quiz.choice", "pk": 13, "fields": {"question": 4, "text": "Один и тот же стек вызовов.", "is_correct": false}},
+  {"model": "quiz.choice", "pk": 14, "fields": {"question": 4, "text": "Один и тот же счётчик команд.", "is_correct": false}},
+  {"model": "quiz.choice", "pk": 15, "fields": {"question": 4, "text": "Виртуальное адресное пространство процесса.", "is_correct": true}},
+  {"model": "quiz.choice", "pk": 16, "fields": {"question": 4, "text": "Один и тот же набор сохранённых значений регистров.", "is_correct": false}},
+  {
+    "model": "quiz.question",
+    "pk": 5,
+    "fields": {
+      "topic": 1,
+      "text": "Какой процесс в Unix называют зомби?",
+      "explanation": "После завершения потомка ядро хранит его статус, пока родитель не заберёт его через wait или аналогичный вызов."
+    }
+  },
+  {"model": "quiz.choice", "pk": 17, "fields": {"question": 5, "text": "Готовый процесс, которому долго не выделяют процессор.", "is_correct": false}},
+  {"model": "quiz.choice", "pk": 18, "fields": {"question": 5, "text": "Завершившийся процесс, статус которого родитель ещё не забрал.", "is_correct": true}},
+  {"model": "quiz.choice", "pk": 19, "fields": {"question": 5, "text": "Работающий процесс, родитель которого завершился.", "is_correct": false}},
+  {"model": "quiz.choice", "pk": 20, "fields": {"question": 5, "text": "Процесс, ожидающий завершения ввода-вывода.", "is_correct": false}},
+  {
+    "model": "quiz.question",
+    "pk": 6,
+    "fields": {
+      "topic": 2,
+      "text": "Что делает MMU при обычном обращении программы к памяти?",
+      "explanation": "MMU преобразует виртуальный адрес в физический по настроенным ОС отображениям и проверяет права доступа."
+    }
+  },
+  {"model": "quiz.choice", "pk": 21, "fields": {"question": 6, "text": "Выбирает следующий процесс для выполнения.", "is_correct": false}},
+  {"model": "quiz.choice", "pk": 22, "fields": {"question": 6, "text": "Выделяет объекты в куче вместо библиотеки программы.", "is_correct": false}},
+  {"model": "quiz.choice", "pk": 23, "fields": {"question": 6, "text": "Преобразует виртуальный адрес в физический и проверяет права доступа.", "is_correct": true}},
+  {"model": "quiz.choice", "pk": 24, "fields": {"question": 6, "text": "Самостоятельно загружает с диска все страницы процесса.", "is_correct": false}},
+  {
+    "model": "quiz.question",
+    "pk": 7,
+    "fields": {
+      "topic": 2,
+      "text": "Что происходит при обращении к разрешённой странице, которая сейчас не находится в ОЗУ?",
+      "explanation": "Страничное исключение передаёт управление ядру: оно загружает или выделяет страницу и возобновляет доступ."
+    }
+  },
+  {"model": "quiz.choice", "pk": 25, "fields": {"question": 7, "text": "Процессор читает данные напрямую из файла подкачки.", "is_correct": false}},
+  {"model": "quiz.choice", "pk": 26, "fields": {"question": 7, "text": "Возникает страничное исключение, которое обрабатывает ОС.", "is_correct": true}},
+  {"model": "quiz.choice", "pk": 27, "fields": {"question": 7, "text": "Инструкция всегда получает нули и продолжает работу без исключения.", "is_correct": false}},
+  {"model": "quiz.choice", "pk": 28, "fields": {"question": 7, "text": "Операционная система обязательно завершает процесс.", "is_correct": false}},
+  {
+    "model": "quiz.question",
+    "pk": 8,
+    "fields": {
+      "topic": 2,
+      "text": "Что кэширует буфер TLB?",
+      "explanation": "При попадании в TLB процессор получает готовую трансляцию адреса без обхода таблиц страниц."
+    }
+  },
+  {"model": "quiz.choice", "pk": 29, "fields": {"question": 8, "text": "Содержимое файлов, недавно открытых процессом.", "is_correct": false}},
+  {"model": "quiz.choice", "pk": 30, "fields": {"question": 8, "text": "Значения локальных переменных текущей функции.", "is_correct": false}},
+  {"model": "quiz.choice", "pk": 31, "fields": {"question": 8, "text": "Список свободных физических кадров памяти.", "is_correct": false}},
+  {"model": "quiz.choice", "pk": 32, "fields": {"question": 8, "text": "Соответствия виртуальных страниц физическим кадрам.", "is_correct": true}},
+  {
+    "model": "quiz.question",
+    "pk": 9,
+    "fields": {
+      "topic": 2,
+      "text": "Какой пример иллюстрирует внутреннюю фрагментацию при страничном выделении памяти?",
+      "explanation": "Неиспользуемые байты находятся внутри уже выделенной страницы, поэтому фрагментация внутренняя."
+    }
+  },
+  {"model": "quiz.choice", "pk": 33, "fields": {"question": 9, "text": "Часть последней выделенной страницы осталась неиспользованной.", "is_correct": true}},
+  {"model": "quiz.choice", "pk": 34, "fields": {"question": 9, "text": "Между выделенными областями остались отдельные свободные кадры.", "is_correct": false}},
+  {"model": "quiz.choice", "pk": 35, "fields": {"question": 9, "text": "Страница была выгружена на диск.", "is_correct": false}},
+  {"model": "quiz.choice", "pk": 36, "fields": {"question": 9, "text": "В TLB не оказалось трансляции адреса.", "is_correct": false}},
+  {
+    "model": "quiz.question",
+    "pk": 10,
+    "fields": {
+      "topic": 2,
+      "text": "Как работает копирование при записи для приватной страницы, которую после fork разделяют родитель и потомок?",
+      "explanation": "Оба процесса читают одну физическую страницу; при попытке записи ОС создаёт отдельную копию для пишущего процесса."
+    }
+  },
+  {"model": "quiz.choice", "pk": 37, "fields": {"question": 10, "text": "Страница копируется сразу при fork, даже если никто не будет писать.", "is_correct": false}},
+  {"model": "quiz.choice", "pk": 38, "fields": {"question": 10, "text": "Страница копируется при каждом чтении.", "is_correct": false}},
+  {"model": "quiz.choice", "pk": 39, "fields": {"question": 10, "text": "Страница копируется при попытке записи в неё, пока она общая.", "is_correct": true}},
+  {"model": "quiz.choice", "pk": 40, "fields": {"question": 10, "text": "Запись в общую страницу видна обоим процессам без копирования.", "is_correct": false}}
+]

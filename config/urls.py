@@ -1,6 +1,8 @@
 from django.urls import path
-from django.views.generic import TemplateView
+
+from quiz.views import HomeView, TopicDetailView
 
 urlpatterns = [
-    path("", TemplateView.as_view(template_name="home.html"), name="home"),
+    path("", HomeView.as_view(), name="home"),
+    path("topics/<slug:slug>/", TopicDetailView.as_view(), name="topic-detail"),
 ]
